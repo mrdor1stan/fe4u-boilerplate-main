@@ -17,9 +17,10 @@ function randomNote(full_name, course) {
     return rand(phrases);
 }
 
+let id = 12206461;
+
 function getUsersArray(array) {
     let users = [];
-    let id = 12206461;
     for (let i = 0; i < array.length; i++) {
         var favorite = array[i].favorite === false ? false : array[i].favorite || rand([false, true]);
         var bg_color = array[i].bg_color || "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -70,11 +71,13 @@ function task1() {
 
 function isValid(teacher) {
 
+
     var firstCapitalLetter = new RegExp("^([A-Z].*)$");
-    if (firstCapitalLetter.test(teacher.note) && firstCapitalLetter.test(teacher.full_name) && firstCapitalLetter.test(teacher.state)
-        && firstCapitalLetter.test(teacher.city) && firstCapitalLetter.test(teacher.country) && typeof (teacher.age) === 'number' &&
-       /* (/^\+(\([0-9]{3}\))|([0-9]{3})[\-\s\.]?[0-9]{3}[\-\s\.]?[0-9]{4,6}$/.test(teacher.phone))&&*/  teacher.email.includes('@'))
-        return true;
+    if (teacher.b_date !== "" && teacher.course !== "choose")
+        if (/*firstCapitalLetter.test(teacher.note) &&*/ firstCapitalLetter.test(teacher.full_name) && firstCapitalLetter.test(teacher.state)
+            && firstCapitalLetter.test(teacher.city) && firstCapitalLetter.test(teacher.country) && typeof (teacher.age) === 'number' &&
+            /* (/^\+(\([0-9]{3}\))|([0-9]{3})[\-\s\.]?[0-9]{3}[\-\s\.]?[0-9]{4,6}$/.test(teacher.phone))&&*/  teacher.email.includes('@'))
+            return true;
     return false;
 }
 
@@ -105,8 +108,8 @@ function filterUsers(users, country, age, gender, favorite) {
 }
 
 function sortUsers(users, field, ascendingOrder) {
-        users = users.sort((a, b) => ascendingOrder ? compareObjects(a, b, field) : compareObjects(b, a, field));
-       return users;
+    users = users.sort((a, b) => ascendingOrder ? compareObjects(a, b, field) : compareObjects(b, a, field));
+    return users;
 
 }
 
@@ -252,12 +255,67 @@ function addAddingTeacherPopup() {
             document.getElementById("add-teacher").setAttribute("style", "display: none");
             return;
         }
-    })
+    });
+}
 
+function addTeacherOnClickingButton() {
     document.getElementById("add-button").addEventListener("click", (event) => {
         event.preventDefault();
-        let form = document.getElementById("add-teacher-form");
 
+        function calculateAge(birthday) { // birthday is a date
+            var ageDifMs = Date.now() - birthday;
+            var ageDate = new Date(ageDifMs); // miliseconds from epoch
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
+        }
+
+        let age = calculateAge(Date.parse(document.getElementById("birthdate").value));
+
+        let user = {
+            "id": id,
+            "favorite": false,
+            "bg_color": document.getElementById("bg-colour").value,
+            "course": document.getElementById("speciality").options[document.getElementById("speciality").selectedIndex].innerText,
+            "note": document.getElementById("comments").value,
+            "title": undefined,
+            "gender": document.getElementById("male").checked ? "male" : "female",
+            "full_name": document.getElementById("name").value,
+            "city": document.getElementById("city").value,
+            "state": document.getElementById("city").value,
+            "country": document.getElementById("country").value,
+            "postcode": undefined,
+            "coordinates": {
+                "latitude": undefined,
+                "longitude": undefined
+            },
+            "timezone": {
+                "offset": undefined,
+                "description": undefined
+            },
+            "email": document.getElementById("email").value,
+            "b_date": document.getElementById("birthdate").value,
+            "age": age,
+            "phone": document.getElementById("phone").value,
+            "picture_large": undefined,
+            "picture_thumbnail": undefined
+        };
+
+        if (isValid(user)) {
+            processedArray.push(user);
+            id++;
+            let countries = [];
+            let country = document.getElementById("search-region");
+            for (let i = 0; i < country.options.length; ++i) {
+                countries.push(country.options[i].innerText)
+            }
+            if (!countries.includes(user.country)) {
+                countries.push(user.country);
+                updateCountryFilters(countries);
+            }
+            applyFilters();
+
+            document.getElementById("add-teacher-close-button").click();
+            addTeacherPopup(user, processedArray.length - 1);
+        } else alert("Invalid user data. Check if the input is correct and try again.")
 
     });
 
@@ -350,22 +408,43 @@ function addTeacherPopup(teacher, num) {
 
 }
 
+function updateCountryFilters(countriesChoices) {
+    let country = document.createElement("select");
+    country.setAttribute("id", "search-region");
+    country.setAttribute("name", "region");
+
+    let option = document.createElement("option");
+    option.setAttribute("value", "");
+    option.innerText = "All";
+    country.appendChild(option);
+
+    countriesChoices.sort((el1, el2) => compare(el1, el2));
+
+    let filterNodes = getFilterNodes(countriesChoices);
+    for (let option of filterNodes)
+        country.appendChild(option);
+
+    document.getElementById("search-region").replaceWith(country);
+}
+
+function getFilterNodes(countriesChoices) {
+    let filterNodes = [];
+    for (let t of countriesChoices) {
+        let option = document.createElement("option");
+        option.setAttribute("value", t.replaceAll(" ", "-"))
+        option.innerText = t;
+        filterNodes.push(option);
+    }
+    return filterNodes;
+}
 
 function addFilterOptions() {
-    let country = document.getElementById("search-region");
     let countriesChoices = [];
     for (let t of processedArray) {
         if (t.country && !countriesChoices.find((el) => el === t.country))
             countriesChoices.push(t.country);
     }
-    countriesChoices.sort((el1, el2) => compare(el1, el2));
-    for (let t of countriesChoices) {
-        let option = document.createElement("option");
-        option.setAttribute("value", t.replaceAll(" ", "-"))
-        option.innerText = t;
-        country.appendChild(option);
-    }
-
+    updateCountryFilters(countriesChoices);
 
     document.getElementById("teachers-search-filters").addEventListener("change", () => {
         applyFilters();
@@ -399,7 +478,7 @@ function applyFilters() {
     }
     let i = 0;
     for (let t of processedArray) {
-        if (t.age > ageMoreThan && t.age < ageLessThan && (country === 'All' || t.country === country) &&
+        if (t.age >= ageMoreThan && t.age <= ageLessThan && (country === 'All' || t.country === country) &&
             ((sex === "" || sex === t.gender) || (sex === "other" && !('male' === t.gender || 'female' === t.gender))) && (onlyWithPhoto === false || t.picture_large) && (onlyFavourites === false || t.favorite)) {
             let article = document.createElement("article");
             article.setAttribute("id", "list-user-" + i);
@@ -493,44 +572,55 @@ function createStatisticsTable(trs) {
     gender.setAttribute("id", "statistics-table-gender");
     nationality.setAttribute("id", "statistics-table-nationality");
 
-    name.addEventListener("click", ()=>{
+    name.addEventListener("click", () => {
         createStatisticsTable(createStatisticsTableContent(sortUsers(filteredArray, "full_name", ascending)));
-        document.getElementById("statistics-table-name").setAttribute("class", "selected-column-"+ascending);
+        document.getElementById("statistics-table-name").setAttribute("class", "selected-column-" + ascending);
         ascending = !ascending;
 
     });
 
-    speciality.addEventListener("click", ()=>{
+    speciality.addEventListener("click", () => {
         createStatisticsTable(createStatisticsTableContent(sortUsers(filteredArray, "course", ascending)));
-        document.getElementById("statistics-table-speciality").setAttribute("class", "selected-column-"+ascending);
+        document.getElementById("statistics-table-speciality").setAttribute("class", "selected-column-" + ascending);
         ascending = !ascending;
     });
 
-    age.addEventListener("click", ()=>{
+    age.addEventListener("click", () => {
         createStatisticsTable(createStatisticsTableContent(sortUsers(filteredArray, "age", ascending)));
-        document.getElementById("statistics-table-age").setAttribute("class", "selected-column-"+ascending);
+        document.getElementById("statistics-table-age").setAttribute("class", "selected-column-" + ascending);
         ascending = !ascending;
     });
 
-    gender.addEventListener("click", ()=>{
+    gender.addEventListener("click", () => {
         createStatisticsTable(createStatisticsTableContent(sortUsers(filteredArray, "gender", ascending)));
-        document.getElementById("statistics-table-gender").setAttribute("class", "selected-column-"+ascending);
+        document.getElementById("statistics-table-gender").setAttribute("class", "selected-column-" + ascending);
         ascending = !ascending;
     });
-    nationality.addEventListener("click", ()=>{
+    nationality.addEventListener("click", () => {
         createStatisticsTable(createStatisticsTableContent(sortUsers(filteredArray, "country", ascending)));
-        document.getElementById("statistics-table-nationality").setAttribute("class", "selected-column-"+ascending);
+        document.getElementById("statistics-table-nationality").setAttribute("class", "selected-column-" + ascending);
         ascending = !ascending;
     });
 
     for (let a of [name, speciality, age, gender, nationality])
         header.appendChild(a);
-    for(let a of [header, ...trs])
-        table.appendChild(a);
+    table.appendChild(header);
+    if (trs.length > 0)
+        for (let a of trs)
+            table.appendChild(a);
+    else {
+    let tr = document.createElement('tr');
+    let th = document.createElement('td');
+    th.setAttribute("colspan","5");
+    th.innerText="No such elements found";
+    tr.appendChild(th);
+    table.appendChild(tr);
+    }
 
     document.getElementById("statistics-table").replaceWith(table);
 }
-    let ascending = true;
+
+let ascending = true;
 
 function createStatisticsTableContent() {
     let trs = [];
@@ -550,14 +640,14 @@ function createStatisticsTableContent() {
         countrytd.innerText = t.country;
         for (let a of [nametd, coursetd, agetd, gendertd, countrytd])
             tr.appendChild(a);
-       trs.push(tr);
+        trs.push(tr);
     }
     return trs;
 }
 
-   function capitalize(string){
+function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+}
 
 function addSpecialitiesToForm() {
     let speciality = document.getElementById("speciality");
@@ -567,14 +657,15 @@ function addSpecialitiesToForm() {
 }
 
 window.onload = function () {
-    filteredArray=[...processedArray];
+    filteredArray = [...processedArray];
     addTeachers(processedArray);
     document.getElementById("search").addEventListener("submit", (event) => (searchResults(event)));
     addFilterOptions();
-createStatisticsTable(createStatisticsTableContent());
+    createStatisticsTable(createStatisticsTableContent());
     addSpecialitiesToForm();
     for (let t of document.getElementsByClassName("add-teacher-button"))
         t.addEventListener("click", () => {
             addAddingTeacherPopup();
         })
+    addTeacherOnClickingButton();
 }

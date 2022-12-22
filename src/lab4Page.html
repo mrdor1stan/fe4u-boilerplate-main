@@ -40,7 +40,6 @@
                 <div class="right-border">
                     <label for="search-age">Age</label>
                     <select id="search-age" name="age">
-                        <option value="">All</option>
                         <option value="18-31">18-31</option>
                         <option value="32-45">32-45</option>
                         <option value="45-58">45-58</option>
@@ -259,7 +258,7 @@
                 <input class="wide-text" id="name" name="name" placeholder="Enter name" required>
                 <label class="wide-text" for="speciality">Speciality</label>
                 <select aria-label="Speciality" class="wide-text" id="speciality" name="speciality" required>
-                    <option disabled hidden selected>choose</option>
+                    <option disabled hidden selected value="">choose</option>
                 </select>
                 <label for="country">Country</label>
                 <label for="city">City</label>
@@ -271,7 +270,7 @@
                 <input id="phone" name="phone" type="tel" required>
                 <div class="wide-text">
                     <label class="wide-text" for="birthdate">Date of birth</label>
-                    <input class="wide-text" id="birthdate" name="birthdate" type="date">
+                    <input class="wide-text" required id="birthdate" name="birthdate" type="date">
                 </div>
                 <div class="wide-text">
                     <label for="bg-colour">Background color</label>
@@ -280,7 +279,7 @@
                 <div class="wide-text">
                     <label id="sex">Sex</label>
                     <input for="sex" id="male"
-                           name="sex" type="radio" value="male" required>
+                           name="sex" type="radio" value="male" checked>
                     <label for="male">Male</label>
 
                     <input for="sex" id="female"
