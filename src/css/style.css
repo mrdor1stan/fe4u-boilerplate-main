@@ -1,0 +1,570 @@
+@font-face {
+  font-family: "PT Sans";
+  src: url("../fonts/PTSans-Regular.ttf");
+}
+
+body {
+  --pink: #f67b5a;
+  --pink-hover: #d93c28;
+  --table-white: #fdfdfe;
+  --table-pink: #f9f4fa;
+  --gray: #a8aba2;
+  --black: #222220;
+  --pfp-size: 175px;
+
+  font-family: "PT Sans";
+  background: #fcfcfc;
+}
+
+.logo {
+  display: flex;
+  width: fit-content;
+  color: white;
+  justify-content: left;
+  font-family: Cambria;
+  font-weight: bolder;
+  text-shadow:
+    -2px -2px rgba(255, 0, 0, 0.42),
+    2px 2px rgba(0, 0, 0, 0.42);
+  font-size: 3rem;
+  transition: all 1s;
+}
+
+.logo:hover {
+  text-shadow:
+    -3px -3px rgba(255, 0, 0, 0.6),
+    4px 4px rgba(0, 0, 0, 0.6);
+  transform: scale(110%);
+}
+
+.row-list {
+  padding-inline-start: 0;
+}
+
+.row-list li {
+  list-style-type: none;
+  float: left;
+  margin-right: 5px;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+.row-list li a {
+  text-decoration: none;
+  color: var(--pink);
+  padding-right: 15px;
+}
+
+a:hover {
+  color: var(--pink-hover);
+}
+
+.page-bg {
+  margin: -10px 10%;
+  background: #fdfdfe;
+  box-shadow: 0 0 20px -5px rgba(0, 0, 0, 0.38);
+}
+
+header {
+  margin: 0 2%;
+  display: flex;
+  flex-flow: column;
+  padding: 15px;
+}
+
+.row1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.row2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+nav li {
+  font-size: 1.25em;
+}
+
+.add-teacher-button {
+  margin: 0;
+  border: 4px solid var(--pink);
+  color: var(--pink);
+  width: 140px;
+  height: 40px;
+  display: block;
+  font-size: 1rem;
+  font-family: "PT Sans";
+  background: linear-gradient(to top, var(--table-white) 50%, var(--pink-hover) 50%);
+  background-size: 100% 200%;
+  background-position: left bottom;
+  transition: all 0.5s ease-out;
+}
+
+.add-teacher-button:hover {
+  border: 4px solid var(--pink-hover);
+  background-position: left top;
+  color: var(--table-white);
+}
+
+.search-field {
+  display: block;
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  font-family: "PT Sans";
+  transition: all 1s;
+  width: 175px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.search-field:hover {
+  width: 210px;
+}
+
+.search-button {
+  border: 4px solid var(--pink);
+  color: var(--pink);
+  width: 60px;
+  height: 25px;
+  display: block;
+  font-size: 0.7rem;
+  font-family: "PT Sans";
+  background: linear-gradient(to top, var(--table-white) 50%, var(--pink-hover) 50%);
+  background-size: 100% 200%;
+  background-position: left bottom;
+  transition: all 0.5s ease-out;
+}
+
+.search-button:hover {
+  border: 4px solid var(--pink-hover);
+  background-position: left top;
+  color: var(--table-white);
+}
+
+article {
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-bg article {
+  margin: 0 5%;
+}
+
+#search {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#teachers form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  color: var(--gray);
+}
+
+#teachers form div {
+  padding: 0 5px;
+}
+
+div.right-border {
+  border-right: dotted 2px var(--gray);
+}
+
+#teachers-list,
+#search-results {
+  margin-top: 10px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-flow: row wrap;
+  column-gap: normal;
+}
+
+.teacher-entity {
+  float: left;
+  width: var(--pfp-size);
+  margin: 20px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.teacher-entity p.name {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: 6px;
+  color: black;
+  word-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.teacher-entity p.speciality {
+  color: var(--gray);
+  font-size: 1em;
+}
+
+.teacher-entity p.country {
+  font-size: 0.8em;
+  color: black;
+}
+
+div.teacher-pfp {
+  position: relative;
+  top: 0;
+  left: 0;
+  transition: all 0.5s;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  border: solid 6px var(--pink);
+  width: var(--pfp-size);
+  height: var(--pfp-size);
+  margin: auto;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.star img {
+  position: absolute;
+  top: 0;
+  left: calc(var(--pfp-size) / 3 * 2);
+  z-index: 2;
+  width: calc(var(--pfp-size) / 3);
+}
+
+div.teacher-pfp:hover {
+  border: solid 6px var(--pink-hover);
+  cursor: pointer;
+}
+
+div.teacher-pfp p {
+  font-size: 3rem;
+  color: var(--pink);
+  font-weight: bold;
+  transition: all 0.5s;
+}
+
+div.teacher-pfp:hover p {
+  color: var(--pink-hover);
+  transform: scale(110%);
+}
+
+div.teacher-pfp img {
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.popup-pfp {
+  width: 100%;
+}
+
+div.teacher-pfp:hover img {
+  width: 110%;
+}
+
+#statistics table {
+  width: 100%;
+  text-align: center;
+  background-color: var(--table-white);
+}
+
+#statistics table tr:nth-child(odd) {
+  background-color: var(--table-pink);
+}
+
+#statistics table th {
+  background-color: var(--table-white);
+  border-bottom: 1px solid var(--black);
+  padding: 3px 0;
+  transition: 0.25s all;
+}
+
+#statistics table th:hover {
+  background-color: #efefef;
+  border-bottom: 2px solid var(--black);
+}
+
+.clear {
+  clear: both;
+  padding: 0 40%;
+}
+
+footer {
+  padding: 5%;
+}
+
+.lower-nav {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+
+#teacher-info {
+  border: 1px solid black;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-row: 11;
+  grid-row-end: auto;
+  grid-column: 2;
+  grid-template-columns: 0.4fr 0.8fr;
+
+  /* display: none; */
+}
+
+.popup-header {
+  padding: 10px;
+  background-color: #222220;
+  grid-column: 1 / 3;
+  color: whitesmoke;
+  padding: 0 20px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.carousel-outer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+
+#carousel {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-flow: row nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  margin: 15px 0;
+}
+
+#statistics table tr > th.selected-column-true {
+  background-color: var(--pink);
+}
+
+#statistics table tr > th.selected-column-false {
+  background-color: #3ac7d9;
+}
+
+.carousel-outer img {
+  width: 50px;
+  height: auto;
+}
+
+#teacher-info .name {
+  font-size: 2em;
+  margin-top: 15px;
+}
+
+.not-display {
+  display: none !important;
+}
+
+#teacher-info-favourite {
+  cursor: pointer;
+  color: white;
+  width: 15em;
+}
+
+#teacher-info-favourite.favourite-true {
+  background-color: #f29e4c;
+}
+
+#teacher-info-favourite.favourite-false {
+  background-color: #16db93;
+}
+
+#teacher-info-favourite.favourite-true:hover {
+  background-color: #a4036f;
+}
+
+#teacher-info-favourite.favourite-false:hover {
+  background-color: #048ba8;
+}
+
+#teacher-info p {
+  margin: 4px 0;
+}
+
+#teacher-info .speciality {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+#teacher-info a {
+  color: cornflowerblue;
+}
+
+#add-teacher-form {
+  display: grid;
+  grid-area: auto;
+  grid-column: 2;
+  grid-row: 17;
+  gap: 1% 4%;
+  margin: 3%;
+}
+
+#add-teacher-form input,
+select {
+  padding: 10px 0;
+}
+
+#add-teacher {
+  border: 1px solid black;
+}
+
+#add-button {
+  border: 4px solid var(--pink);
+  color: var(--pink);
+  display: block;
+  font-size: 1rem;
+  height: 80px;
+  margin-top: 30px;
+  font-family: "PT Sans";
+  font-size: 2em;
+  font-weight: bold;
+  background: linear-gradient(to top, var(--table-white) 50%, var(--pink-hover) 50%);
+  background-size: 100% 200%;
+  background-position: left bottom;
+  transition: all 0.5s ease-out;
+}
+
+#comments {
+  resize: none;
+  grid-row: 13 / 16;
+}
+
+#add-button:hover {
+  border: 4px solid var(--pink-hover);
+  background-position: left top;
+  color: var(--table-white);
+}
+
+.long-photo {
+  margin: 20px 10px 10px 10px;
+  grid-row: 2 / 9;
+  width: 90%;
+}
+
+.wide-text {
+  grid-column: 1 / 3;
+  padding: 0 10px;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.popup {
+  z-index: 4;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: var(--table-white);
+}
+
+#overlay {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.36);
+  background-repeat: repeat;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+button:hover,
+#add-button:hover,
+.search-button:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .popup {
+    z-index: 4;
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    transform: translate(-40%, -40%);
+    width: 80%;
+    background-color: var(--table-white);
+  }
+
+  .page-bg {
+    margin: -10px 0;
+
+    --pfp-size: 270px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .row1,
+  .row2 {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .row1 *,
+  .row2 * {
+    padding: 5px;
+  }
+
+  li {
+    margin-right: 2px;
+  }
+
+  .lower-nav {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+  }
+
+  #teachers-list,
+  #search-results {
+    justify-content: center;
+  }
+
+  .add-teacher-button {
+    height: 50px;
+    margin: auto;
+  }
+
+  .search-button {
+    height: 40px;
+  }
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="./js/main.js" type="module"></script>
+    <title>Main - Teachinder</title>
+</head>
+<body>
+<div class="page-bg">
+    <header>
+        <div class="row1">
+            <h1 class="logo">Teachinder</h1>
+            <form id="search">
+                <input aria-label="Search field" class="search-field" id="search-field" name="search"
+                       placeholder="Name, note or age to search"
+                       type="search">
+                <input class="search-button" id="search-button" type="submit" value="Search">
+            </form>
+        </div>
+        <div class="row2">
+            <nav>
+                <ul class="row-list">
+                    <li><a href="#teachers">Teachers</a></li>
+                    <li><a href="#statistics">Statistics</a></li>
+                    <li><a href="#favorites">Favorites</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            <button class="add-teacher-button">Add teacher</button>
+        </div>
+        <div class="clear">
+            <hr>
+        </div>
+    </header>
+    <main>
+        <article id="teachers">
+            <h3>Top teachers</h3>
+            <form id="teachers-search-filters">
+                <div class="right-border">
+                    <label for="search-age">Age</label>
+                    <select id="search-age" name="age">
+                        <option value="">All</option>
+                        <option value="18-31">18-31</option>
+                        <option value="32-45">32-45</option>
+                        <option value="45-58">45-58</option>
+                        <option value="58-120">58+</option>
+                    </select>
+                </div>
+
+                <div class="right-border">
+                    <label for="search-region">Region</label>
+                    <select id="search-region" name="region">
+                        <option value="">All</option>
+                    </select>
+                </div>
+
+                <div class="right-border">
+                    <label for="search-sex">Sex</label>
+                    <select id="search-sex" name="sex">
+                        <option value="">All</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="right-border">
+                    <input id="only-with-photo" name="only-with-photo" type="checkbox" value="on">
+                    <label for="only-with-photo">Only with photo</label>
+                </div>
+                <div>
+                    <input id="only-favs" name="only-favs" type="checkbox" value="on">
+                    <label for="only-favs">Only favorites</label>
+                </div>
+            </form>
+
+            <section id="teachers-list">
+
+            </section>
+        </article>
+
+        <div class="clear">
+            <hr>
+        </div>
+
+        <article id="statistics">
+            <h3>Statistics</h3>
+            <table id="statistics-table">
+                <tr aria-label="Header row">
+                    <th id="statistics-table-name">Name</th>
+                    <th id="statistics-table-speciality">Speciality</th>
+                    <th id="statistics-table-age">Age</th>
+                    <th id="statistics-table-gender">Gender</th>
+                    <th id="statistics-table-nationality">Nationality</th>
+                </tr>
+                <tr aria-label="Daisy Alexander">
+                    <td>Daisy Alexander</td>
+                    <td>Chemistry</td>
+                    <td>28</td>
+                    <td>Female</td>
+                    <td>Vietnam</td>
+                </tr>
+                <tr aria-label="Julia Bradley">
+                    <td>Julia Bradley</td>
+                    <td>Math</td>
+                    <td>26</td>
+                    <td>Female</td>
+                    <td>USA</td>
+                </tr>
+                <tr aria-label="Rita Hart">
+                    <td>Rita Hart</td>
+                    <td>Art</td>
+                    <td>41</td>
+                    <td>Female</td>
+                    <td>Ireland</td>
+                </tr>
+                <tr aria-label="Jonathan Jacobs">
+                    <td>Jonathan Jacobs</td>
+                    <td>Math</td>
+                    <td>32</td>
+                    <td>Male</td>
+                    <td>England</td>
+                </tr>
+                <tr aria-label="Nathaniel White">
+                    <td>Nathaniel White</td>
+                    <td>Computer Science</td>
+                    <td>37</td>
+                    <td>Male</td>
+                    <td>Austria</td>
+                </tr>
+                <tr aria-label="Frank Medina">
+                    <td>Frank Medina</td>
+                    <td>English</td>
+                    <td>43</td>
+                    <td>Male</td>
+                    <td>Italy</td>
+                </tr>
+                <tr aria-label="Ella Curtis">
+                    <td>Ella Curtis</td>
+                    <td>Chess</td>
+                    <td>34</td>
+                    <td>Female</td>
+                    <td>USA</td>
+                </tr>
+                <tr aria-label="Claire Simmmons">
+                    <td>Claire Simmmons</td>
+                    <td>Art</td>
+                    <td>38</td>
+                    <td>Female</td>
+                    <td>Netherlands</td>
+                </tr>
+                <tr aria-label="Benjamin Knight">
+                    <td>Benjamin Knight</td>
+                    <td>Biology</td>
+                    <td>44</td>
+                    <td>Male</td>
+                    <td>Scotland</td>
+                </tr>
+                <tr aria-label="Norma Rose">
+                    <td>Norma Rose</td>
+                    <td>Statistics</td>
+                    <td>36</td>
+                    <td>Female</td>
+                    <td>France</td>
+                </tr>
+            </table>
+            <ul class="row-list statistics-pagination">
+                <li><a class="active" data-page="1">1</a></li>
+                <li><a data-page="2">2</a></li>
+                <li><a data-page="3">3</a></li>
+                <li><a class="dots">...</a></li>
+                <li><a>last</a></li>
+            </ul>
+        </article>
+
+        <div class="clear">
+            <hr>
+        </div>
+
+        <article id="favorites">
+            <h3>Favorites</h3>
+
+            <div class="carousel-outer">
+                <img src="images/leftarrow.png">
+                <div id="carousel">
+
+                </div>
+                <img src="images/rightarrow.png">
+            </div>
+
+
+        </article>
+
+    </main>
+
+    <footer id="about">
+        <div class="clear">
+            <hr>
+        </div>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
+            facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore
+            et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
+            lacus
+            vel facilisis.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
+            facilisis.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
+            facilisis.</p>
+
+        <nav class="lower-nav">
+            <ul class="row-list">
+                <li><a href="#teachers">Teachers</a></li>
+                <li><a href="#statistics">Statistics</a></li>
+                <li><a href="#favorites">Favorites</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <button class="add-teacher-button">Add teacher</button>
+        </nav>
+    </footer>
+</div>
+
+<div id="overlay" style="display: none;">
+    <div class="popup">
+        <div data-background-color="#1989ff" id="teacher-info" style="display: none;">
+            <div class="popup-header">
+                <h3>Teacher info</h3>
+                <img alt="Close" class="icon" id="teacher-info-close-button"
+                     src="https://flaticons.net/icon.php?slug_category=mobile-application&slug_icon=close">
+            </div>
+            <div class="long-photo" id="teacher-info-picture-div">
+                <img alt="Taylor Swift" class="popup-pfp" id="teacher-info-picture"
+                     src="https://m.media-amazon.com/images/M/MV5BMjA5ODI0NzIzNV5BMl5BanBnXkFtZTcwMzM0NjI2Nw@@._V1_.jpg">
+            </div>
+            <p class="name" id="teacher-info-name">Taylor Swift (she/her)</p>
+            <button id="teacher-info-favourite">Favourite</button>
+            <p class="speciality" id="teacher-info-speciality">Chemistry</p>
+            <p id="teacher-info-place"> Kyiv, Ukraine</p>
+            <p id="teacher-info-age-gender">32, Female</p>
+            <a href="mailto:communications@umusic.com" id="teacher-info-email">communications@umusic.com</a>
+            <p id="teacher-info-phone">+380964993252</p>
+            <p class="wide-text" id="teacher-info-comments">21 жовтня випускає альбом, який треба застрімити всією
+                школою</p>
+            <a>toggle map</a>
+        </div>
+    </div>
+    <div class="popup">
+        <div data-background-color="#1989ff" id="add-teacher" style="display: none;">
+            <div class="popup-header">
+                <h3>Add teacher</h3>
+                <img alt="Close" class="icon" id="add-teacher-close-button" src="images/cross.png">
+            </div>
+            <form id="add-teacher-form">
+                <label class="wide-text" for="name">Name</label>
+                <input class="wide-text" id="name" name="name" placeholder="Enter name" required>
+                <label class="wide-text" for="speciality">Speciality</label>
+                <select aria-label="Speciality" class="wide-text" id="speciality" name="speciality" required>
+                    <option disabled hidden selected>choose</option>
+                </select>
+                <label for="country">Country</label>
+                <label for="city">City</label>
+                <input id="country" required name="country">
+                <input id="city" required name="city">
+                <label for="email" >E-mail</label>
+                <label for="phone">Phone</label>
+                <input id="email" name="email" type="email" required>
+                <input id="phone" name="phone" type="tel" required>
+                <div class="wide-text">
+                    <label class="wide-text" for="birthdate">Date of birth</label>
+                    <input class="wide-text" id="birthdate" name="birthdate" type="date">
+                </div>
+                <div class="wide-text">
+                    <label for="bg-colour">Background color</label>
+                    <input id="bg-colour" name="bg-colour" type="color">
+                </div>
+                <div class="wide-text">
+                    <label id="sex">Sex</label>
+                    <input for="sex" id="male"
+                           name="sex" type="radio" value="male" required>
+                    <label for="male">Male</label>
+
+                    <input for="sex" id="female"
+                           name="sex" type="radio" value="female">
+                    <label for="female">Female</label>
+                </div>
+                <label class="wide-text" for="comments">Notes (optional)</label>
+                <textarea class="wide-text" cols="30" id="comments" name="comments" rows="10"></textarea>
+                <input class="wide-text" id="add-button" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+

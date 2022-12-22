@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/fe4u-boilerplate-main.iml" filepath="$PROJECT_DIR$/.idea/fe4u-boilerplate-main.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/lab04/.idea/lab04.iml" filepath="$USER_HOME$/Downloads/lab04/.idea/lab04.iml" />
+    </modules>
+  </component>
+</project>
