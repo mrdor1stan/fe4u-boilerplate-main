@@ -1,6 +1,7 @@
 import {randomUserMock} from './FE4U-Lab3-mock.js';
 import {additionalUsers} from './FE4U-Lab3-mock.js';
 
+
 let courses = ['Mathematics', 'Physics', 'English', 'Computer Science', 'Dancing', 'Chess', 'Biology', 'Chemistry',
     'Law', 'Art', 'Medicine', 'Statistics'];
 
@@ -19,8 +20,7 @@ function randomNote(full_name, course) {
 
 let id = 12206461;
 
-function getUsersArray(array) {
-    let users = [];
+function getUsersArray(array, users=[]) {
     for (let i = 0; i < array.length; i++) {
         var favorite = array[i].favorite === false ? false : array[i].favorite || rand([false, true]);
         var bg_color = array[i].bg_color || "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -68,6 +68,26 @@ function task1() {
     return withAdditionalUsers;
 }
 
+
+function getUsers(limit) {
+let users = [];
+fetch("https://randomuser.me/api/?results="+limit)
+    .then((res)=>res.json()).then((data)=>getUsersArray(data.results).forEach((user)=>users.push(user)));
+console.log(users);
+
+
+    let addUsers = additionalUsers.filter((ar => !users.find(rm => (ar.phone === rm.phone && ar.email === rm.email))));
+
+    console.log(addUsers);
+    let withAdditionalUsers = users.concat(addUsers);
+    console.log(users);
+    console.log(users.length);
+    console.log([...users]);
+    console.log(withAdditionalUsers);
+    withAdditionalUsers = withAdditionalUsers.filter((el) => isValid(el));
+    console.log(withAdditionalUsers);
+    return withAdditionalUsers;
+}
 
 function isValid(teacher) {
 
@@ -546,7 +566,7 @@ function searchResults(event) {
     }
 }
 
-let processedArray = task1();
+let processedArray;
 let filteredArray;
 
 
@@ -657,6 +677,8 @@ function addSpecialitiesToForm() {
 }
 
 window.onload = function () {
+    processedArray = getUsers(50);
+    console.log(processedArray);
     filteredArray = [...processedArray];
     addTeachers(processedArray);
     document.getElementById("search").addEventListener("submit", (event) => (searchResults(event)));
